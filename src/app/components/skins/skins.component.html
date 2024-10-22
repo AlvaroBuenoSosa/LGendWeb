@@ -1,0 +1,9 @@
+<h1>Precio de la Skin</h1>
+    <div *ngIf="skin">
+      <p><strong>Nombre:</strong> {{ skin.name }}</p>
+      <p><strong>Precio:</strong> {{ skin.lowest_price }}</p>
+      <p><strong>Precio Medio:</strong> {{ skin.median_price }}</p>
+    </div>
+    <div *ngIf="error">
+      <p>Error al obtener los datos: {{ error }}</p>
+    </div>

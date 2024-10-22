@@ -1,0 +1,8 @@
+{
+  "/market": {
+    "target": "https://steamcommunity.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
