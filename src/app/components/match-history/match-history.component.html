@@ -1,1 +1,40 @@
-<p>match-history works!</p>
+<div class="match-history">
+  <h1>Match History</h1>
+
+  <section class="player-profile">
+    <h2>Player Profile</h2>
+    <div *ngIf="playerProfile">
+      <img [src]="playerProfile.avatarfull" alt="Player Avatar" />
+      <p><strong>Name:</strong> {{ playerProfile.personaname }}</p>
+      <p><strong>Profile URL:</strong> <a [href]="playerProfile.profileurl" target="_blank">View Profile</a></p>
+      <p><strong>Last Online:</strong> {{ playerProfile.lastlogoff | date:'medium' }}</p>
+    </div>
+    <div *ngIf="!playerProfile">
+      <p>Loading player profile...</p>
+    </div>
+  </section>
+
+  <section class="owned-games">
+    <h2>Owned Games</h2>
+    <ul>
+      <li *ngFor="let game of ownedGames">
+        <img [src]="game.img_icon_url" alt="Game Icon" />
+        <span>{{ game.name }}</span>
+      </li>
+    </ul>
+    <div *ngIf="ownedGames.length === 0">
+      <p>No owned games found.</p>
+    </div>
+  </section>
+
+  <section class="csgo-stats">
+    <h2>CS:GO Statistics</h2>
+    <div *ngIf="csGoStats">
+      <p><strong>Total Kills:</strong> {{ csGoStats.total_kills }}</p>
+      <!-- Agrega más estadísticas según sea necesario -->
+    </div>
+    <div *ngIf="!csGoStats">
+      <p>Loading CS:GO statistics...</p>
+    </div>
+  </section>
+</div>
