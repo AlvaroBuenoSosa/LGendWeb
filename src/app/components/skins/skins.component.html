@@ -1,9 +1,19 @@
-<h1>Precio de la Skin</h1>
-    <div *ngIf="skin">
-      <p><strong>Nombre:</strong> {{ skin.name }}</p>
-      <p><strong>Precio:</strong> {{ skin.lowest_price }}</p>
-      <p><strong>Precio Medio:</strong> {{ skin.median_price }}</p>
-    </div>
-    <div *ngIf="error">
-      <p>Error al obtener los datos: {{ error }}</p>
-    </div>
+<h1>Precios de las Skins</h1>
+
+<div *ngIf="skins && skins.length > 0" class="skins"> <!-- Verifica que skins no sea null o undefined -->
+  <div *ngFor="let skin of skins">
+    <p><strong>Nombre:</strong> {{ skin.name }}</p>
+    <p><strong>Precio:</strong> {{ skin.lowest_price }}</p>
+    <p><strong>Precio Medio de venta :</strong> {{ skin.median_price }}</p>
+    <img [src]="skin.image" alt="Imagen de la Skin" />
+    <hr />  <!-- Separador entre las skins -->
+  </div>
+</div>
+
+<div *ngIf="skins && skins.length === 0">
+  <p>No hay skins disponibles.</p>
+</div>
+
+<div *ngIf="error">
+  <p>{{ error }}</p>
+</div>
