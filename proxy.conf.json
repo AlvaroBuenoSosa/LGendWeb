@@ -13,5 +13,14 @@
     "pathRewrite": {
       "^/api": ""
     }
+  },
+  "/csstats": {
+    "target": "https://api.csstats.gg",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/csstats": ""
+    }
   }
 }

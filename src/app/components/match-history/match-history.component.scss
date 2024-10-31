@@ -15,7 +15,7 @@
     }
 
     img {
-      max-width: 100px;
+      max-width: 200px;
       margin-right: 10px;
       vertical-align: middle;
     }
@@ -31,4 +31,10 @@
       }
     }
   }
+}
+
+.player-profile-datos{
+  display: flex;
+  align-items: center;
+  justify-content: space-around
 }

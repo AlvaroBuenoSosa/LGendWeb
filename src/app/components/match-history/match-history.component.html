@@ -1,40 +1,50 @@
 <div class="match-history">
   <h1>Match History</h1>
 
+  <!-- Player Profile Section -->
   <section class="player-profile">
     <h2>Player Profile</h2>
-    <div *ngIf="playerProfile">
-      <img [src]="playerProfile.avatarfull" alt="Player Avatar" />
+    <div *ngIf="playerProfile; else loadingProfile" class="player-profile-datos">
+      <img [src]="playerProfile.avatarfull" alt="Player Avatar" class="player-profile-avatar"/>
       <p><strong>Name:</strong> {{ playerProfile.personaname }}</p>
       <p><strong>Profile URL:</strong> <a [href]="playerProfile.profileurl" target="_blank">View Profile</a></p>
       <p><strong>Last Online:</strong> {{ playerProfile.lastlogoff | date:'medium' }}</p>
     </div>
-    <div *ngIf="!playerProfile">
+    <ng-template #loadingProfile>
       <p>Loading player profile...</p>
-    </div>
+    </ng-template>
   </section>
 
+  <!-- Owned Games Section -->
   <section class="owned-games">
     <h2>Owned Games</h2>
-    <ul>
+    <ul *ngIf="ownedGames.length > 0; else noGamesFound">
       <li *ngFor="let game of ownedGames">
-        <img [src]="game.img_icon_url" alt="Game Icon" />
+        <img [src]="'https://media.steampowered.com/steamcommunity/public/images/apps/' + game.appid + '/' + game.img_icon_url + '.jpg'" alt="Game Icon" />
         <span>{{ game.name }}</span>
+        <span>{{ (game.playtime_forever / 60) | number:'1.0-0' }}hours</span>
       </li>
     </ul>
-    <div *ngIf="ownedGames.length === 0">
+    <ng-template #noGamesFound>
       <p>No owned games found.</p>
-    </div>
+    </ng-template>
   </section>
 
-  <section class="csgo-stats">
-    <h2>CS:GO Statistics</h2>
-    <div *ngIf="csGoStats">
-      <p><strong>Total Kills:</strong> {{ csGoStats.total_kills }}</p>
-      <!-- Agrega más estadísticas según sea necesario -->
-    </div>
-    <div *ngIf="!csGoStats">
-      <p>Loading CS:GO statistics...</p>
-    </div>
+  <!-- Match History Section -->
+  <section class="match-history-details">
+    <h2>Recent Matches</h2>
+    <ul *ngIf="matchHistory && matchHistory.length > 0; else noMatchHistory">
+      <li *ngFor="let match of matchHistory">
+        <p><strong>Match ID:</strong> {{ match.id }}</p>
+        <p><strong>Date:</strong> {{ match.date | date:'medium' }}</p>
+        <p><strong>Score:</strong> {{ match.score }}</p>
+        <p><strong>Kills:</strong> {{ match.kills }}</p>
+        <p><strong>Deaths:</strong> {{ match.deaths }}</p>
+        <!-- Agrega aquí otros detalles del match si están disponibles -->
+      </li>
+    </ul>
+    <ng-template #noMatchHistory>
+      <p>No match history found.</p>
+    </ng-template>
   </section>
 </div>

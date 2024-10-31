@@ -7,22 +7,26 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './match-history.component.html',
-  styleUrl: './match-history.component.scss'
+  styleUrls: ['./match-history.component.scss']
 })
 export class MatchHistoryComponent implements OnInit {
 
   playerProfile: any;
   ownedGames: any[] = [];
   csGoStats: any;
+  csStatsData: any;  // Nueva variable para almacenar los datos del jugador desde CSStats
+  playerData: any;
+  matchHistory: any;  // Nueva variable para almacenar el historial de partidas
 
   constructor(private matchHistoryService: MatchHistoryService) {}
 
   ngOnInit(): void {
     this.loadPlayerProfile();
     this.loadOwnedGames();
-    this.loadCsGoStats();
+    this.loadMatchHistory();  // Cargar el historial de partidas
   }
 
+  // Cargar perfil del jugador desde la API de Steam
   loadPlayerProfile() {
     this.matchHistoryService.getPlayerProfile().subscribe({
       next: (data) => {
@@ -35,6 +39,7 @@ export class MatchHistoryComponent implements OnInit {
     });
   }
 
+  // Cargar juegos propiedad del usuario desde la API de Steam
   loadOwnedGames() {
     this.matchHistoryService.getOwnedGames().subscribe({
       next: (data) => {
@@ -47,15 +52,22 @@ export class MatchHistoryComponent implements OnInit {
     });
   }
 
-  loadCsGoStats() {
-    this.matchHistoryService.getCsGoStats().subscribe({
+  // Cargar historial de partidas usando la API de TrackerGG
+  loadMatchHistory() {
+    this.matchHistoryService.getMatchHistory().subscribe({
       next: (data) => {
-        this.csGoStats = data;
-        console.log(this.csGoStats);
+        this.matchHistory = data;
+        console.log('Historial de partidas:', this.matchHistory);
       },
       error: (err) => {
-        console.error('Error fetching CS:GO stats:', err);
+        console.error('Error al obtener el historial de partidas:', err);
       }
     });
   }
 }
+
+
+
+
+
+

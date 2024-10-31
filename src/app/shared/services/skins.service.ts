@@ -70,5 +70,20 @@ export class SkinsService {
       }))
     );
   }
+
+  getSkinSaibaOni(): Observable<any> {
+    const params = new HttpParams()
+      .set('appid', '730') // App ID de CS:GO
+      .set('currency', '3') // Código de moneda (3 para Euros)
+      .set('market_hash_name', 'MAC-10 | Saibā Oni (Factory New)'); // Nombre del artículo
+
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      map((data: any) => ({
+        ...data,
+        name: 'MAC-10 | Saibā Oni', // Nombre de la skin
+        image: this.imageBaseUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7umeldf3vLLIG1948a3n4m0m_7zO6-fwjkD6sF327GSotyn3wPh_0s4MTj1IIGRcgU3Y17T-FK5w-e9gJa4voOJlyVi4U1JyQ/360fx360f', // URL de la imagen
+      }))
+    );
+  }
   
 }
