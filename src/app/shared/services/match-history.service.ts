@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class MatchHistoryService {
   // URLs de la API para diferentes solicitudes
   private apiUrlProfile = `/api/ISteamUser/GetPlayerSummaries/v0002/?key=${this.apiKeySteam}&steamids=${this.steamId}`;
   private apiUrlDatosJuegos = `/api/IPlayerService/GetOwnedGames/v0001/?key=${this.apiKeySteam}&steamid=${this.steamId}&include_appinfo=true&include_played_free_games=true`;
-  private apiUrlStatsCs = `/api/ISteamUserStats/GetGlobalStatsForGame/v0001/?appid=${this.appId}&count=1&name[0]=total_kills&key=${this.apiKeySteam}`;
 
   constructor(private http: HttpClient) {}
 
@@ -39,27 +38,20 @@ export class MatchHistoryService {
     return this.http.get<any>(this.apiUrlDatosJuegos);
   }
 
-  // Método para obtener estadísticas globales de CS:GO
-  getCsGoStats(): Observable<any> {
-    return this.http.get<any>(this.apiUrlStatsCs);
-  }
-
-  getPlayerData(steamId: string): Observable<any> {
-    const apiUrlPlayerData = `/csstats/player/${steamId}`;  // Prefijo /csstats para usar el proxy
-    return this.http.get<any>(apiUrlPlayerData);
-  }
-
   // Método para obtener estadísticas de partidas jugadas usando la API de TrackerGG
   getMatchHistory(): Observable<any> {
-  const apiUrlMatchHistory = `https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${this.steamId}/matches`;
-
-  // Configura las opciones de la solicitud, incluyendo el encabezado con la API Key
-  const headers = {
-    'TRN-Api-Key': this.apiTrackerGG
-  };
-
-  return this.http.get<any>(apiUrlMatchHistory, { headers });
-}
+    const apiUrlMatchHistory = `/tracker/v2/csgo/standard/profile/steam/${this.steamId}/matches`;
+    const headers = {
+      'TRN-Api-Key': this.apiTrackerGG
+    };
+  
+    return this.http.get<any>(apiUrlMatchHistory, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al obtener el historial de partidas:', error);
+        return throwError(error);
+      })
+    );
+  }
 
   
 

@@ -14,13 +14,13 @@
       "^/api": ""
     }
   },
-  "/csstats": {
-    "target": "https://api.csstats.gg",
+  "/tracker": {
+    "target": "https://public-api.tracker.gg",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug",
     "pathRewrite": {
-      "^/csstats": ""
+      "^/tracker": ""
     }
   }
 }
