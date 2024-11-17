@@ -85,5 +85,35 @@ export class SkinsService {
       }))
     );
   }
+
+  getSkinUspNeoNoir(): Observable<any> { 
+    const params = new HttpParams()
+      .set('appid', '730') // App ID de CS:GO
+      .set('currency', '3') // Código de moneda (3 para Euros)
+      .set('market_hash_name', 'USP-S | Neo-Noir (Field-Tested)'); // Nombre del artículo
+
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      map((data: any) => ({
+        ...data,
+        name: 'USP-S | Neo-Noir (Field-Tested)', // Nombre de la skin
+        image: this.imageBaseUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcjhQ09-jq5WYh-TLPbTYhFRc7cF4n-SP99qm31G1-EJpZmH6JYaWdFJtY1HRrFW_xezt1J_v6JrKnSBhvycn4mGdwUK5GAJRtw/360fx360f', // URL de la imagen
+      }))
+    );
+  }
+
+  getSkinEmperor(): Observable<any> { 
+    const params = new HttpParams()
+      .set('appid', '730') // App ID de CS:GO
+      .set('currency', '3') // Código de moneda (3 para Euros)
+      .set('market_hash_name', 'M4A4 | The Emperor (Field-Tested)'); // Nombre del artículo
+
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      map((data: any) => ({
+        ...data,
+        name: 'M4A4 | The Emperor (Field-Tested)', // Nombre de la skin
+        image: this.imageBaseUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhnwMzFJTwW09m7hIWZmOXLPr7Vn35cpsAn3OuTrYit2Afi_ktrNmqiI4eWJlU6NF7Zrwe9wubpjJS7usnKwSZ9-n51LPua7N4/360fx360f', // URL de la imagen
+      }))
+    );
+  }
   
 }

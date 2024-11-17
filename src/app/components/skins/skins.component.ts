@@ -117,6 +117,45 @@ export class SkinsComponent implements OnInit {
           }
         });
 
+        // Obtener el precio de la skin MAC-10 | Saibā Oni (Factory New)
+        this.skinsService.getSkinUspNeoNoir().subscribe({
+          next: (data) => {
+            if (data.lowest_price) {  // Verifica que la respuesta contenga datos válidos
+              this.skins.push({  // Agregar la skin al array `skins`
+                name: data.name,  // Nombre de la skin
+                lowest_price: data.lowest_price || 'Precio no disponible',
+                median_price: data.median_price || 'Precio no disponible',
+                image: data.image  // Imagen de la skin
+              });
+              this.error = null; // Resetear el error si la solicitud es exitosa
+            } else {
+              this.error = 'No se pudo obtener el precio de la skin Hot Rod.'; // Manejo de error si no se obtienen datos
+            }
+          },
+          error: (err) => {
+            this.error = 'Error al obtener los datos: ' + err.message; // Manejo de error de solicitud
+          }
+        });
+
+        this.skinsService.getSkinEmperor().subscribe({
+          next: (data) => {
+            if (data.lowest_price) {  // Verifica que la respuesta contenga datos válidos
+              this.skins.push({  // Agregar la skin al array `skins`
+                name: data.name,  // Nombre de la skin
+                lowest_price: data.lowest_price || 'Precio no disponible',
+                median_price: data.median_price || 'Precio no disponible',
+                image: data.image  // Imagen de la skin
+              });
+              this.error = null; // Resetear el error si la solicitud es exitosa
+            } else {
+              this.error = 'No se pudo obtener el precio de la skin Hot Rod.'; // Manejo de error si no se obtienen datos
+            }
+          },
+          error: (err) => {
+            this.error = 'Error al obtener los datos: ' + err.message; // Manejo de error de solicitud
+          }
+        });
+
   }
 
   
