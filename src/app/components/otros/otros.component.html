@@ -1,1 +1,19 @@
-<p>otros works!</p>
+<div *ngIf="product1">
+  <h3>Producto 1</h3>
+  <p>{{ product1.name }}</p>
+  <p>Precio actual: {{ product1.current_price }}</p>
+  <p>Precio en oferta: {{ product1.sale_price }}</p>
+  <img [src]="product1.image" alt="{{ product1.name }}">
+</div>
+
+<div *ngIf="product2">
+  <h3>Producto 2</h3>
+  <p>{{ product2.name }}</p>
+  <p>Precio actual: {{ product2.current_price }}</p>
+  <p>Precio en oferta: {{ product2.sale_price }}</p>
+  <img [src]="product2.image" alt="{{ product2.name }}">
+</div>
+
+<div *ngIf="error">
+  <p>{{ error }}</p>
+</div>

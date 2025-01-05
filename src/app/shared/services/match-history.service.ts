@@ -9,8 +9,8 @@ export class MatchHistoryService {
 
   private apiKeySteam = '391CE3115B6FEBFA7800F5AD9F614BE5'; // Reemplaza con tu API Key
   private steamId = '76561198917617584'; // ID de Steam de LGenDOfficial
-  private appId = 730; // App ID de CS:G
-  private apiTrackerGG = '59315f65-d0c4-4c31-8641-bc4a1c068873';
+  private appId = 730; // App ID de CS:GO
+  private apiTrackerGG = 'c09b1cec-a342-4da4-ac39-ad5b96731e5f';
 
   // URLs de la API para diferentes solicitudes
   private apiUrlProfile = `/api/ISteamUser/GetPlayerSummaries/v0002/?key=${this.apiKeySteam}&steamids=${this.steamId}`;
